@@ -35,26 +35,30 @@ public class ChampionStats implements Champion {
 
     public ChampionStats(String championName){
         championName = this.championName;
+        try {
+            champStatsViaAPI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
 
-    public void champStatsViaAPI(String addr) throws Exception {
+    public void champStatsViaAPI() throws Exception {
         // build a URL
-        String s = "https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=stats&dataById=false&api_key=RGAPI-764745a2-bbb5-45eb-a241-87310b98a88a";
-        s += URLEncoder.encode(addr, "UTF-8");
+        String s = "https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=stats&dataById=false&api_key=RGAPI-cc6257d5-b980-4a9a-9b10-eae3422eed61";
         URL url = new URL(s);
 
         // read from the URL
         Scanner scan = new Scanner(url.openStream());
         String str = new String();
-        while (scan.hasNext())
+      //  while (scan.hasNext())
             str += scan.nextLine();
         scan.close();
 
         // build a JSON object
         JSONObject stats = new JSONObject(str);
-        if (!stats.getString("status").equals("OK"))
+        if (!stats.optString("status").equals("OK"))
             return;
 
 
@@ -116,7 +120,7 @@ public class ChampionStats implements Champion {
 
     //the array is ordered the following way
     //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
-    public double[] getStats() {
+    public double[] getStats(){
         calculateStats();
         double[] statArray ={hp,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange};
         return statArray;

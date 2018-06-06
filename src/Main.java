@@ -4,8 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -34,9 +33,24 @@ public class Main extends Application {
                 );
         ComboBox<String> leftChampionComboBox = new ComboBox<>(champions);
         ComboBox<String> rightChampionComboBox = new ComboBox<>(champions);
+        TextField leftChampionLevel = new TextField("1");
+        TextField rightChampionLevel = new TextField("1");
+        rightChampionLevel.setAlignment(Pos.CENTER_RIGHT);
+        Button compareButton = new Button("Compare!");
+        ToolBar toolBar = new ToolBar(
+                leftChampionComboBox,
+                new Separator(),
+                leftChampionLevel,
+                new Label("Level"),
+                rightChampionLevel,
+                new Separator(),
+                rightChampionComboBox,
+                new Separator(),
+                compareButton
+                );
+        borderPane.setTop(toolBar);
+        borderPane.setAlignment(toolBar,Pos.TOP_CENTER);
 
-        Label platzhalterTop = new Label("Hier könnte momentan IHRE Werbung stehen!");
-        borderPane.setTop(platzhalterTop);
         Label platzhalterBot = new Label("Auch hier könnte momentan noch IHRE Werbung stehen!");
         borderPane.setBottom(platzhalterBot);
        /* Image jinxLeft = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\jinx.jpg"));
@@ -154,29 +168,6 @@ public class Main extends Application {
             rightChampionStatsLabel[i].setStyle(labelDesign);
         }
 
-        borderPane.setTop(leftChampionComboBox);
-        borderPane.setAlignment(leftChampionComboBox,Pos.TOP_LEFT);
-        borderPane.setTop(rightChampionComboBox);
-        borderPane.setAlignment(rightChampionComboBox,Pos.TOP_RIGHT);
-
-
-
-
-        Champion leftChampion = new ChampionStats(leftChampionComboBox.getSelectionModel().getSelectedItem());
-        Champion rightChampion = new ChampionStats(rightChampionComboBox.getSelectionModel().getSelectedItem());
-
-        leftChampionStats=leftChampion.getStats();
-        rightChampionStats=rightChampion.getStats();
-
-        for (int i=0;i<10;i++) {
-            leftChampionStats[i]=Math.random()*10;
-            rightChampionStats[i]=Math.random()*10;
-        }
-
-        compareStats(leftChampionStats,rightChampionStats);
-
-
-
         String betterStat = "-fx-background-color: lightgrey; " +
                 "-fx-text-fill: #17ff21;" +
                 "-fx-font-weight: bold;" +
@@ -191,12 +182,29 @@ public class Main extends Application {
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;";
 
-        for (int i = 0;i<compareArray.length;i++){
-            if(compareArray[i]==0){leftChampionStatsLabel[i].setStyle(betterStat);}
-            if(compareArray[i]==2){leftChampionStatsLabel[i].setStyle(worseStat);}
-            if(compareArray[i]==0){rightChampionStatsLabel[i].setStyle(worseStat);}
-            if(compareArray[i]==2){rightChampionStatsLabel[i].setStyle(betterStat);}
-        }
+
+        compareButton.setOnAction(event -> {
+            Champion leftChampion = new ChampionStats(leftChampionComboBox.getSelectionModel().getSelectedItem());
+            Champion rightChampion = new ChampionStats(rightChampionComboBox.getSelectionModel().getSelectedItem());
+            leftChampionStats=leftChampion.getStats();
+            rightChampionStats=rightChampion.getStats();
+           /* for (int i=0;i<10;i++) {
+                leftChampionStats[i]=Math.random()*10;
+                rightChampionStats[i]=Math.random()*10;
+            }*/
+            for (int i = 0; i<10;i++){
+                leftChampionStatsLabel[i].setText(leftChampionStats[i]+"");
+                rightChampionStatsLabel[i].setText(rightChampionStats[i]+"");
+
+            }
+            compareStats(leftChampionStats,rightChampionStats);
+            for (int i = 0;i<compareArray.length;i++){
+                if(compareArray[i]==0){leftChampionStatsLabel[i].setStyle(betterStat);}
+                if(compareArray[i]==2){leftChampionStatsLabel[i].setStyle(worseStat);}
+                if(compareArray[i]==0){rightChampionStatsLabel[i].setStyle(worseStat);}
+                if(compareArray[i]==2){rightChampionStatsLabel[i].setStyle(betterStat);}
+            }
+        });
 
 
         primaryStage.setTitle("Champion compare Patch 8.11");
