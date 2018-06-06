@@ -1,0 +1,125 @@
+import org.json.JSONObject;
+
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.function.DoubleBinaryOperator;
+
+
+public class ChampionStats implements Champion {
+
+    private String championName;
+    private double hp;
+    private double hpperlevel;
+    private double mp;
+    private double mpperlevel;
+    private double movespeed;
+    private double armor;
+    private double armorperlevel;
+    private double spellblock;
+    private double spellblockperlevel;
+    private double attackrange;
+    private double hpregen;
+    private double hpregenperlevel;
+    private double mpregen;
+    private double mpregenperlevel;
+    private double crit;
+    private double critperlevel;
+    private double attackdamage;
+    private double attackdamageperlevel;
+    private double attackspeedoffset;
+    private double attackspeedperlevel;
+
+    public ChampionStats(String championName){
+        championName = this.championName;
+    }
+
+
+
+    public void champStatsViaAPI(String addr) throws Exception {
+        // build a URL
+        String s = "https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=stats&dataById=false&api_key=RGAPI-764745a2-bbb5-45eb-a241-87310b98a88a";
+        s += URLEncoder.encode(addr, "UTF-8");
+        URL url = new URL(s);
+
+        // read from the URL
+        Scanner scan = new Scanner(url.openStream());
+        String str = new String();
+        while (scan.hasNext())
+            str += scan.nextLine();
+        scan.close();
+
+        // build a JSON object
+        JSONObject stats = new JSONObject(str);
+        if (!stats.getString("status").equals("OK"))
+            return;
+
+
+        hp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hp");
+        hpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpperlevel");
+        mp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp");
+        mpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel");
+        movespeed = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("movespeed");
+        armor = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("armor");
+        armorperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("armorperlevel");
+        spellblock = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblock");
+        spellblockperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblockperlevel");
+        attackrange = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackrange");
+        hpregen = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpregen");
+        hpregenperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpregenperlevel");
+        mpregen = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpregen");
+        mpregenperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpregenperlevel");
+        crit = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("crit");
+        critperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("critperlevel");
+        attackdamage = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamage");
+        attackdamageperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamageperlevel");
+        attackspeedoffset = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedoffset");
+        attackspeedperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedperlevel");
+    }
+
+    double level = 1;
+    double attackspeed;
+
+
+    //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
+    private void calculateStats(){
+        // hp = hp + (hpperlevel * (0.65+0.035*level)) + item;
+        // spellblock = spellblock +(spellblockperlevel * (0.65+0.035*level)) + item;
+       // cdr = cdr + item;
+        //movespeed = movespeed +item;
+        if (movespeed>415 && movespeed<490){
+            movespeed=movespeed*0.8+83;
+        }
+        if (movespeed>490){
+            movespeed = movespeed * 0.5+230;
+        }
+        //attackdamage = attackdamage + (attackdamageperlevel*(0.65+0.035*level)) +item;
+       // attackspeed =
+
+    }
+
+    public void setLevel(double lvl){
+        level = lvl;
+    }
+
+    public void addItem(String addedItem) {
+    //    item = addedItem;
+    }
+
+    //the array is ordered the following way
+    //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
+    public double[] getStats() {
+        double[] statArray ={4,6.8};
+        return statArray;
+    }
+
+    public int getWinrate() {
+        int winRate = 0;
+        // winRate =
+
+        return winRate;
+    }
+}
