@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -29,7 +30,7 @@ public class Main extends Application {
 
         ObservableList<String> champions =
                 FXCollections.observableArrayList(
-                        "Ashe","Caitlyn","Draven","ChampionStats","Tristana","Varus"
+                        "Ashe","Caitlyn","Draven","Jinx","Tristana","Varus"
                 );
         ComboBox<String> leftChampionComboBox = new ComboBox<>(champions);
         ComboBox<String> rightChampionComboBox = new ComboBox<>(champions);
@@ -38,13 +39,13 @@ public class Main extends Application {
         borderPane.setTop(platzhalterTop);
         Label platzhalterBot = new Label("Auch hier könnte momentan noch IHRE Werbung stehen!");
         borderPane.setBottom(platzhalterBot);
-        Image jinxLeft = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\jinx.jpg"));
+       /* Image jinxLeft = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\jinx.jpg"));
         ImageView leftChampionImage = new ImageView(jinxLeft);
         Image jinxRight = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\jinx.jpg"));
         ImageView rightChampionImage = new ImageView(jinxRight);
         borderPane.setLeft(leftChampionImage);
         borderPane.setRight(rightChampionImage);
-
+*/
         //gridpane
         //colums
         ColumnConstraints col0 = new ColumnConstraints();
@@ -104,7 +105,7 @@ public class Main extends Application {
         Label leftChampionDPS= new Label("0");
         Label leftChampionrange= new Label("0");
 
-        Label[] leftChampionStatsLabel = {leftChampionHP,leftChampionarmor,leftChampionMR,leftChampionMR,leftChampionCDR,leftChampionMS,leftChampionAD,
+        Label[] leftChampionStatsLabel = {leftChampionHP,leftChampionarmor,leftChampionMR,leftChampionCDR,leftChampionMS,leftChampionAD,
                 leftChampionAS,leftChampioncrit,leftChampionDPS,leftChampionrange};
 
 
@@ -119,7 +120,7 @@ public class Main extends Application {
         Label rightChampionDPS= new Label("0");
         Label rightChampionrange= new Label("0");
 
-        Label[] rightChampionStatsLabel = {rightChampionHP,rightChampionarmor,rightChampionMR,rightChampionMR,rightChampionCDR,rightChampionMS,rightChampionAD,
+        Label[] rightChampionStatsLabel = {rightChampionHP,rightChampionarmor,rightChampionMR,rightChampionCDR,rightChampionMS,rightChampionAD,
                 rightChampionAS,rightChampioncrit,rightChampionDPS,rightChampionrange};
 
 
@@ -135,8 +136,10 @@ public class Main extends Application {
             GridPane.setHalignment(statNameLabelArray[i], HPos.CENTER);
             leftChampionStatsLabel[i].setTextAlignment(TextAlignment.CENTER);
             GridPane.setHalignment(leftChampionStatsLabel[i], HPos.CENTER);
+            leftChampionStatsLabel[i].setMinWidth(40);
             rightChampionStatsLabel[i].setTextAlignment(TextAlignment.CENTER);
             GridPane.setHalignment(rightChampionStatsLabel[i], HPos.CENTER);
+            rightChampionStatsLabel[i].setMinWidth(40);
         }
 
         String labelDesign = "-fx-background-color: darkgrey; " +
@@ -151,14 +154,19 @@ public class Main extends Application {
             rightChampionStatsLabel[i].setStyle(labelDesign);
         }
 
+        borderPane.setTop(leftChampionComboBox);
+        borderPane.setAlignment(leftChampionComboBox,Pos.TOP_LEFT);
+        borderPane.setTop(rightChampionComboBox);
+        borderPane.setAlignment(rightChampionComboBox,Pos.TOP_RIGHT);
+
 
 
 
         Champion leftChampion = new ChampionStats(leftChampionComboBox.getSelectionModel().getSelectedItem());
         Champion rightChampion = new ChampionStats(rightChampionComboBox.getSelectionModel().getSelectedItem());
 
-        //leftChampionStats=leftChampion.getStats();
-        //rightChampionStats=rightChampion.getStats();
+        leftChampionStats=leftChampion.getStats();
+        rightChampionStats=rightChampion.getStats();
 
         for (int i=0;i<10;i++) {
             leftChampionStats[i]=Math.random()*10;
@@ -170,7 +178,7 @@ public class Main extends Application {
 
 
         String betterStat = "-fx-background-color: lightgrey; " +
-                "-fx-text-fill: greenyellow;" +
+                "-fx-text-fill: #17ff21;" +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 18;" +
                 "-fx-border-width: 2;" +
@@ -191,7 +199,7 @@ public class Main extends Application {
         }
 
 
-        primaryStage.setTitle("Champion compare Patch 8.10");
+        primaryStage.setTitle("Champion compare Patch 8.11");
         primaryStage.setScene(new Scene(borderPane, 720, 550));
         primaryStage.show();
     }

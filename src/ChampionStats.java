@@ -82,27 +82,32 @@ public class ChampionStats implements Champion {
 
     double level = 1;
     double attackspeed;
+    double dps;
+    double cdr;
 
 
     //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
     private void calculateStats(){
-        // hp = hp + (hpperlevel * (0.65+0.035*level)) + item;
-        // spellblock = spellblock +(spellblockperlevel * (0.65+0.035*level)) + item;
-       // cdr = cdr + item;
-        //movespeed = movespeed +item;
+        hp = hp + (hpperlevel * (0.65+0.035*level));// + item;
+        spellblock = spellblock +(spellblockperlevel * (0.65+0.035*level));// + item;
+        cdr = cdr;// + item;
+        movespeed = movespeed;// +item;
         if (movespeed>415 && movespeed<490){
             movespeed=movespeed*0.8+83;
         }
         if (movespeed>490){
             movespeed = movespeed * 0.5+230;
         }
-        //attackdamage = attackdamage + (attackdamageperlevel*(0.65+0.035*level)) +item;
-       // attackspeed =
-
+        attackdamage = attackdamage + (attackdamageperlevel*(0.65+0.035*level));// +item;
+        double bonusAttackSpeed = (attackspeedperlevel*(0.65+0.035*level));//+item;
+        attackspeed =(0.625/1+attackspeedoffset)+(0.625/1+attackspeedoffset)*bonusAttackSpeed;
+        crit = crit;// + item;
+        double critDamageAmplifier = 1 + crit/100;
+        dps = (attackdamage*attackspeed)* critDamageAmplifier;
     }
 
     public void setLevel(double lvl){
-        level = lvl;
+       // level = lvl;
     }
 
     public void addItem(String addedItem) {
@@ -112,7 +117,8 @@ public class ChampionStats implements Champion {
     //the array is ordered the following way
     //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
     public double[] getStats() {
-        double[] statArray ={4,6.8};
+        calculateStats();
+        double[] statArray ={hp,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange};
         return statArray;
     }
 
