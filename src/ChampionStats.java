@@ -35,11 +35,7 @@ public class ChampionStats implements Champion {
 
     public ChampionStats(String championName){
         championName = this.championName;
-        try {
-            champStatsViaAPI();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
 
@@ -62,7 +58,8 @@ public class ChampionStats implements Champion {
             return;
 
 
-        hp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hp");
+        hp = stats.getDouble("data."+championName+".stats.hp");//.getJSONObject(championName).getJSONObject("stats").getDouble("hp");
+        System.out.println(championName+" hp sind " + hp);
         hpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpperlevel");
         mp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp");
         mpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel");
@@ -120,8 +117,9 @@ public class ChampionStats implements Champion {
 
     //the array is ordered the following way
     //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
-    public double[] getStats(){
-        calculateStats();
+    public double[] getStats() throws Exception {
+        champStatsViaAPI();
+                //calculateStats();
         double[] statArray ={hp,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange};
         return statArray;
     }

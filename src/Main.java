@@ -168,15 +168,15 @@ public class Main extends Application {
             rightChampionStatsLabel[i].setStyle(labelDesign);
         }
 
-        String betterStat = "-fx-background-color: lightgrey; " +
+        String betterStat = "-fx-background-color: grey; " +
                 "-fx-text-fill: #17ff21;" +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 18;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;";
 
-        String worseStat = "-fx-background-color: lightgrey; " +
-                "-fx-text-fill: red;" +
+        String worseStat = "-fx-background-color: grey; " +
+                "-fx-text-fill: #ff585a;" +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 18;" +
                 "-fx-border-width: 2;" +
@@ -186,8 +186,16 @@ public class Main extends Application {
         compareButton.setOnAction(event -> {
             Champion leftChampion = new ChampionStats(leftChampionComboBox.getSelectionModel().getSelectedItem());
             Champion rightChampion = new ChampionStats(rightChampionComboBox.getSelectionModel().getSelectedItem());
-            leftChampionStats=leftChampion.getStats();
-            rightChampionStats=rightChampion.getStats();
+            try {
+                leftChampionStats=leftChampion.getStats();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                rightChampionStats=rightChampion.getStats();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
            /* for (int i=0;i<10;i++) {
                 leftChampionStats[i]=Math.random()*10;
                 rightChampionStats[i]=Math.random()*10;
