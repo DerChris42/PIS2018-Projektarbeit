@@ -54,8 +54,9 @@ public class ChampionStats implements Champion {
 
         // build a JSON object
         JSONObject stats = new JSONObject(str);
-        if (!stats.optString("status").equals("OK"))
-            return;
+        if (!stats.optString("status").equals("OK")){
+            System.out.println("status nicht korrekt");
+        }
 
 
         hp = stats.getDouble("data."+championName+".stats.hp");//.getJSONObject(championName).getJSONObject("stats").getDouble("hp");
