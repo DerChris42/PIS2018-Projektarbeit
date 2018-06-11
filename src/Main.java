@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.beans.Observable;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -13,8 +15,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 
+import javax.print.DocFlavor;
+import javax.swing.event.ChangeListener;
 import java.io.FileInputStream;
+import java.util.function.UnaryOperator;
 
 
 public class Main extends Application {
@@ -35,6 +41,20 @@ public class Main extends Application {
         ComboBox<String> rightChampionComboBox = new ComboBox<>(champions);
         TextField leftChampionLevel = new TextField("1");
         TextField rightChampionLevel = new TextField("1");
+
+        UnaryOperator<TextFormatter.Change> integerFilter = change -> {
+            String newText = change.getControlNewText();
+            if (newText.matches("-?([1-9][0-9]*)?")) {
+                return change;
+            }
+            return null;
+        };
+
+        leftChampionLevel.setTextFormatter(
+                new TextFormatter<Integer>(new IntegerStringConverter(), 1, integerFilter));
+        rightChampionLevel.setTextFormatter(
+                new TextFormatter<Integer>(new IntegerStringConverter(), 1, integerFilter));
+
         rightChampionLevel.setAlignment(Pos.CENTER_RIGHT);
         Button compareButton = new Button("Compare!");
         ToolBar toolBar = new ToolBar(
@@ -168,14 +188,14 @@ public class Main extends Application {
             rightChampionStatsLabel[i].setStyle(labelDesign);
         }
 
-        String betterStat = "-fx-background-color: grey; " +
+        String betterStat = "-fx-background-color: darkgrey; " +
                 "-fx-text-fill: #17ff21;" +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 18;" +
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;";
 
-        String worseStat = "-fx-background-color: grey; " +
+        String worseStat = "-fx-background-color: darkgrey; " +
                 "-fx-text-fill: #ff585a;" +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 18;" +
@@ -184,22 +204,29 @@ public class Main extends Application {
 
 
         compareButton.setOnAction(event -> {
-            Champion leftChampion = new ChampionStats(leftChampionComboBox.getSelectionModel().getSelectedItem());
-            Champion rightChampion = new ChampionStats(rightChampionComboBox.getSelectionModel().getSelectedItem());
+            String leftChampionName = leftChampionComboBox.getSelectionModel().getSelectedItem();
+            String rightChampionName = rightChampionComboBox.getSelectionModel().getSelectedItem();
+            Champion leftChampion = new ChampionStats();
+            Champion rightChampion = new ChampionStats();
+            if (Integer.parseInt(leftChampionLevel.getText())>18){
+                leftChampionLevel.setText("18");
+            }
+            leftChampion.setLevel(Integer.parseInt(leftChampionLevel.getText()));
+            if (Integer.parseInt(rightChampionLevel.getText())>18){
+                rightChampionLevel.setText("18");
+            }
+            rightChampion.setLevel(Integer.parseInt(rightChampionLevel.getText()));
+            System.out.println("Der Linke Champion heißt " + leftChampionName + " und der Rechte heißt " + rightChampionName);
             try {
-                leftChampionStats=leftChampion.getStats();
+                leftChampionStats=leftChampion.getStats(leftChampionName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
-                rightChampionStats=rightChampion.getStats();
+                rightChampionStats=rightChampion.getStats(rightChampionName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-           /* for (int i=0;i<10;i++) {
-                leftChampionStats[i]=Math.random()*10;
-                rightChampionStats[i]=Math.random()*10;
-            }*/
             for (int i = 0; i<10;i++){
                 leftChampionStatsLabel[i].setText(leftChampionStats[i]+"");
                 rightChampionStatsLabel[i].setText(rightChampionStats[i]+"");

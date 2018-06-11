@@ -4,10 +4,8 @@ public interface Champion {
 
     //the array is ordered the following way
     //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
-    double[] getStats() throws Exception;
+    double[] getStats(String champName) throws Exception;
 
-    int getWinrate();
-
-    void setLevel(double lvl);
+    void setLevel(int lvl);
 
 }
