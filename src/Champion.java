@@ -1,4 +1,4 @@
-public interface Champion {
+interface Champion {
 
     void addItem(String item,int index);
 

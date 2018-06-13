@@ -12,12 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 
@@ -61,9 +56,9 @@ public class Main extends Application {
         };
 
         leftChampionLevel.setTextFormatter(
-                new TextFormatter<Integer>(new IntegerStringConverter(), 1, integerFilter));
+                new TextFormatter<>(new IntegerStringConverter(), 1, integerFilter));
         rightChampionLevel.setTextFormatter(
-                new TextFormatter<Integer>(new IntegerStringConverter(), 1, integerFilter));
+                new TextFormatter<>(new IntegerStringConverter(), 1, integerFilter));
 
         rightChampionLevel.setAlignment(Pos.CENTER_RIGHT);
         Button compareButton = new Button("Compare!");
@@ -79,7 +74,7 @@ public class Main extends Application {
                 compareButton
                 );
         borderPane.setTop(topToolBar);
-        borderPane.setAlignment(topToolBar,Pos.TOP_CENTER);
+        BorderPane.setAlignment(topToolBar,Pos.TOP_CENTER);
 
 
         GridPane leftSide = new GridPane();
@@ -107,15 +102,14 @@ public class Main extends Application {
         rightChampionItems.setHgap(4);
         rightChampionItems.setPrefColumns(2);
 
-       // rightSide.add(rightChampionImageView,0,0);
         leftSide.add(leftChampionItems,0,1);
         rightSide.add(rightChampionItems,0,1);
 
         ObservableList<String> items =
                 FXCollections.observableArrayList(
-                        "No Item","Infinity Edge","Death's Dance","The Bloodthirster","Essence Reaver","Stormrazor","Mercurial Scimitar",
-                        "The Black Cleaver","B. F. Sword","Blade of the Ruined King","Guinsoo's Rageblade","Nashor's Tooth",
-                        "Phantom Dancer","Trinity Force","Berserker's Greaves","Guardian Angel"
+                        "No Item","B. F. Sword","Berserker's Greaves","Blade of the Ruined King","Death's Dance","Essence Reaver",
+                        "Guardian Angel","Guinsoo's Rageblade","Infinity Edge","Mercurial Scimitar","Nashor's Tooth",
+                        "Phantom Dancer","Stormrazor","The Black Cleaver","The Bloodthirster","Trinity Force"
                 );
 
         ComboBox<String> leftItem1 = new ComboBox<>(items);
@@ -249,8 +243,8 @@ public class Main extends Application {
                 "-fx-border-width: 2;" +
                 "-fx-border-color: black;";
 
-        for (int i = 0; i<statNameLabelArray.length;i++){
-            statNameLabelArray[i].setStyle(labelDesign);
+        for (Label aStatNameLabelArray : statNameLabelArray) {
+            aStatNameLabelArray.setStyle(labelDesign);
         }
 
         //event handling
@@ -271,7 +265,7 @@ public class Main extends Application {
 
             for (int i = 0; i<11;i++){
                 leftChampionStatsTextField[i].setText(((double)(Math.round((leftChampionStats[i]*10))))/10+"");
-                rightChampionStatsTextField[i].setText(Math.round(rightChampionStats[i])+"");
+                rightChampionStatsTextField[i].setText(((double)(Math.round((rightChampionStats[i]*10))))/10+"");
 
             }
             compareStats(leftChampionStats,rightChampionStats);
@@ -352,7 +346,6 @@ public class Main extends Application {
             leftChampionImageView.setImage(championImageMap.get(selectedChampion));
             leftSide.add(leftChampionImageView,0,0);
         });
-
         rightChampionComboBox.setOnAction((event) -> {
             String selectedChampion = rightChampionComboBox.getSelectionModel().getSelectedItem();
             ImageView rightChampionImageView = new ImageView();
@@ -369,7 +362,7 @@ public class Main extends Application {
 
     private double[] leftChampionStats = new double[11];
     private double[] rightChampionStats = new double[11];
-    private int[] compareArray= new int[11];
+    private final int[] compareArray= new int[11];
 
     private void compareStats(double[] leftStats, double[] rightStats){
         for(int i =0; i<compareArray.length;i++){

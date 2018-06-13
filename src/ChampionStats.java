@@ -1,18 +1,14 @@
 import org.json.JSONObject;
-
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
 
 public class ChampionStats implements Champion {
 
     private String championName;
     private double hp;
     private double hpperlevel;
-    private double mana;
-    private double manaperlevel;
     private double mp;
     private double mpperlevel;
     private double movespeed;
@@ -21,35 +17,30 @@ public class ChampionStats implements Champion {
     private double spellblock;
     private double spellblockperlevel;
     private double attackrange;
-    private double hpregen;
-    private double hpregenperlevel;
-    private double mpregen;
-    private double mpregenperlevel;
     private double crit;
-    private double critperlevel;
     private double attackdamage;
     private double attackdamageperlevel;
     private double attackspeedoffset;
     private double attackspeedperlevel;
-    int level = 1;
-    double attackspeed;
-    double dps;
-    double cdr;
+    private int level = 1;
+    private double attackspeed;
+    private double dps;
+    private double cdr;
     private JSONObject stats;
-    private String[] itemArray = new String[6];
-    double itemHP=0;
-    double itemMana=0;
-    double itemArmor=0;
-    double itemSpellblock=0;
-    double itemcdr=0;
-    double itemMovespeed=0;
-    double itemAttackDamage=0;
-    double itemAttackSpeed=0;
-    double itemCrit=0;
-    double itemAP=0;
-    double itemMovespeedPercentModifier=0;
-    boolean hasInfinityEdge=false;
-    int itemPrice=0;
+    private final String[] itemArray = new String[6];
+    private double itemHP=0;
+    private double itemMana=0;
+    private double itemArmor=0;
+    private double itemSpellblock=0;
+    private double itemcdr=0;
+    private double itemMovespeed=0;
+    private double itemAttackDamage=0;
+    private double itemAttackSpeed=0;
+    private double itemCrit=0;
+    private double itemAP=0;
+    private double itemMovespeedPercentModifier=0;
+    private boolean hasInfinityEdge=false;
+    private int itemPrice=0;
 
 
     public ChampionStats(){
@@ -76,26 +67,24 @@ public class ChampionStats implements Champion {
         itemMap.put("Guardian Angel",() -> {itemAttackDamage+=45;itemArmor+=40;itemPrice+=2800;});
     }
 
-    public void callRiotGamesAPI() throws Exception {
+    private void callRiotGamesAPI() throws Exception {
 
         String s = "https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=stats&dataById=false&api_key=RGAPI-cc6257d5-b980-4a9a-9b10-eae3422eed61";
         URL url = new URL(s);
 
         Scanner scan = new Scanner(url.openStream());
-        String str = new String();
+        StringBuilder str = new StringBuilder();
         while (scan.hasNext()) {
-            str += scan.nextLine();
+            str.append(scan.nextLine());
         }
         scan.close();
 
-        stats = new JSONObject(str);
+        stats = new JSONObject(str.toString());
     }
 
     private void getStatsFromJSON(){
 
         hp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hp");
-        mana = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel");
-        manaperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp");
         hpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpperlevel");
         mp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp");
         mpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel");
@@ -105,12 +94,7 @@ public class ChampionStats implements Champion {
         spellblock = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblock");
         spellblockperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("spellblockperlevel");
         attackrange = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackrange");
-        hpregen = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpregen");
-        hpregenperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpregenperlevel");
-        mpregen = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpregen");
-        mpregenperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpregenperlevel");
         crit = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("crit");
-        critperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("critperlevel");
         attackdamage = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamage");
         attackdamageperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamageperlevel");
         attackspeedoffset = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedoffset");
@@ -118,7 +102,7 @@ public class ChampionStats implements Champion {
         cdr = 0; //neccessary! wizjout it cdr would stack up with each comparison
     }
 
-    Map<String,Runnable> itemMap = new HashMap<>();
+    private final Map<String,Runnable> itemMap = new HashMap<>();
 
     private void calculateItemStats(){
         itemHP=0;
@@ -144,7 +128,7 @@ public class ChampionStats implements Champion {
     //[HP,Mana,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
     private void calculateStats(){
         hp = hp + hpperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemAttackDamage;
-        mana = mana + manaperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemMana;
+        mp = mp + mpperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemMana;
         armor = armor + armorperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemArmor;
         spellblock = spellblock +(spellblockperlevel * (level-1) * (0.7025+0.0175*(level-1)))+itemSpellblock;
         cdr = cdr + itemcdr;
@@ -187,9 +171,7 @@ public class ChampionStats implements Champion {
         getStatsFromJSON();
         calculateItemStats();
         calculateStats();
-        double[] statArray ={hp,mana,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange,itemPrice};
-       // final int[] intStatArray = Arrays.stream(statArray).mapToInt(i -> (int) i).toArray();
-        return statArray;
+        return new double[]{hp,mp,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange,itemPrice};
     }
 
     public int getItemPrice(){
