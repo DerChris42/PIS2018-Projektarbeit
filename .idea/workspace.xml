@@ -3,12 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3e624ab6-67d4-4898-aa55-f82a4c68a036" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/Champion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/Champion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PIS2018-Projektarbeit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PIS2018-Projektarbeit.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/ChampionStats.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/ChampionStats.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Champion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Champion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/images/jinx.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PIS2018-Projektarbeit/images/jinx.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ChampionStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChampionStats.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/jinx.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/jinx.jpg" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,15 +21,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="73" column="59" lean-forward="true" selection-start-line="73" selection-start-column="59" selection-end-line="73" selection-end-column="59" />
+            <state relative-caret-position="-1523">
+              <caret line="283" column="113" selection-start-line="283" selection-start-column="113" selection-end-line="283" selection-end-column="113" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#12560#12561#0" expanded="true" />
-                <element signature="e#12588#12589#0" expanded="true" />
+                <element signature="e#18287#18288#0" expanded="true" />
+                <element signature="e#18315#18316#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -37,24 +37,25 @@
       <file leaf-file-name="Champion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Champion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="23" />
+            <state relative-caret-position="132">
+              <caret line="6" column="44" lean-forward="true" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChampionStats.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ChampionStats.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ChampionStats.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-201">
-              <caret line="169" column="35" selection-start-line="169" selection-start-column="35" selection-end-line="169" selection-end-column="35" />
+            <state relative-caret-position="58">
+              <caret line="91" column="5" lean-forward="true" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
               <folding>
-                <element signature="e#8887#8888#0" expanded="true" />
-                <element signature="e#8914#8915#0" expanded="true" />
-                <element signature="e#8969#8970#0" expanded="true" />
-                <element signature="e#9015#9016#0" expanded="true" />
-                <element signature="e#9505#9506#0" expanded="true" />
-                <element signature="e#9537#9538#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#8782#8783#0" expanded="true" />
+                <element signature="e#8809#8810#0" expanded="true" />
+                <element signature="e#8864#8865#0" expanded="true" />
+                <element signature="e#8910#8911#0" expanded="true" />
+                <element signature="e#9495#9496#0" expanded="true" />
+                <element signature="e#9527#9528#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,10 +77,13 @@
       <find>left</find>
       <find>//</find>
       <find>leftchampionima</find>
+      <find>leftchampionlevel</find>
+      <find>Label</find>
     </findStrings>
     <replaceStrings>
       <replace>topToolBar</replace>
       <replace>right</replace>
+      <replace>TextField</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -91,6 +95,7 @@
         <option value="$PROJECT_DIR$/src/images/StatsCollector.java" />
         <option value="$PROJECT_DIR$/src/StatsCollector.java" />
         <option value="$PROJECT_DIR$/src/Champion.java" />
+        <option value="$PROJECT_DIR$/PIS2018-Projektarbeit.iml" />
         <option value="$PROJECT_DIR$/src/ChampionStats.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
@@ -106,16 +111,18 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="32" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-10" />
+    <option name="y" value="30" />
+    <option name="width" value="1938" />
+    <option name="height" value="1058" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -130,22 +137,32 @@
             </path>
             <path>
               <item name="PIS2018-Projektarbeit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PIS2018-Projektarbeit" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PIS2018-Projektarbeit" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -229,19 +246,20 @@
       <workItem from="1528702438617" duration="7857000" />
       <workItem from="1528737390877" duration="3931000" />
       <workItem from="1528812832801" duration="11417000" />
+      <workItem from="1528886801708" duration="417000" />
+      <workItem from="1528887290278" duration="8418000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25270000" />
+    <option name="totallyTimeSpent" value="34105000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="33" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32943678" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32827586" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -249,7 +267,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32943678" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32827586" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -283,13 +301,70 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1980">
-          <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+        <state relative-caret-position="2904">
+          <caret line="148" column="51" selection-start-line="148" selection-start-column="51" selection-end-line="148" selection-end-column="51" />
+          <folding>
+            <element signature="e#18287#18288#0" expanded="true" />
+            <element signature="e#18315#18316#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Champion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PIS2018-Projektarbeit.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="49" lean-forward="true" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChampionStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#12560#12561#0" expanded="true" />
-            <element signature="e#12588#12589#0" expanded="true" />
+            <element signature="e#8782#8783#0" expanded="true" />
+            <element signature="e#8809#8810#0" expanded="true" />
+            <element signature="e#8864#8865#0" expanded="true" />
+            <element signature="e#8910#8911#0" expanded="true" />
+            <element signature="e#9495#9496#0" expanded="true" />
+            <element signature="e#9527#9528#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1606">
+          <caret line="73" column="51" lean-forward="true" selection-start-line="73" selection-start-column="51" selection-end-line="73" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Champion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChampionStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2970">
+          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1980">
+          <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -304,14 +379,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="858">
           <caret line="39" column="11" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
-          <folding>
-            <element signature="e#8887#8888#0" expanded="true" />
-            <element signature="e#8914#8915#0" expanded="true" />
-            <element signature="e#8969#8970#0" expanded="true" />
-            <element signature="e#9015#9016#0" expanded="true" />
-            <element signature="e#9505#9506#0" expanded="true" />
-            <element signature="e#9537#9538#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -319,11 +386,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1034">
           <caret line="47" column="30" lean-forward="true" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12560#12561#0" expanded="true" />
-            <element signature="e#12588#12589#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -338,14 +400,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2244">
           <caret line="102" column="59" selection-start-line="102" selection-start-column="59" selection-end-line="102" selection-end-column="59" />
-          <folding>
-            <element signature="e#8887#8888#0" expanded="true" />
-            <element signature="e#8914#8915#0" expanded="true" />
-            <element signature="e#8969#8970#0" expanded="true" />
-            <element signature="e#9015#9016#0" expanded="true" />
-            <element signature="e#9505#9506#0" expanded="true" />
-            <element signature="e#9537#9538#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -353,11 +407,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4356">
           <caret line="198" column="75" selection-start-line="198" selection-start-column="75" selection-end-line="198" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12560#12561#0" expanded="true" />
-            <element signature="e#12588#12589#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -365,14 +414,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1144">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#8887#8888#0" expanded="true" />
-            <element signature="e#8914#8915#0" expanded="true" />
-            <element signature="e#8969#8970#0" expanded="true" />
-            <element signature="e#9015#9016#0" expanded="true" />
-            <element signature="e#9505#9506#0" expanded="true" />
-            <element signature="e#9537#9538#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -446,62 +487,150 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/sun/net/www/protocol/http/HttpURLConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="1912" selection-start-line="1912" selection-end-line="1912" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/javafx.graphics/com/sun/glass/ui/View.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="941" selection-start-line="941" selection-end-line="941" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/java.base/sun/net/www/protocol/http/HttpURLConnection.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-10/lib/src.zip!/javafx.graphics/com/sun/glass/ui/View.java" />
     <entry file="file://$PROJECT_DIR$/src/images/StatsCollector.java" />
     <entry file="file://$PROJECT_DIR$/src/StatsCollector.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20180130/json-20180130-sources.jar!/org/json/JSONObject.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20180130/json-20180130-sources.jar!/org/json/JSONObject.java" />
+    <entry file="file://$PROJECT_DIR$/PIS2018-Projektarbeit.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2130">
-          <caret line="515" selection-start-line="515" selection-end-line="515" />
+        <state relative-caret-position="198">
+          <caret line="9" column="49" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
         </state>
       </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/Caitlyn.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/Ashe.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/images/Jinx.jpg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Champion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="23" />
+        <state relative-caret-position="132">
+          <caret line="6" column="44" lean-forward="true" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ChampionStats.java">
+    <entry file="jar://$PROJECT_DIR$/lib/json-20170516.jar!/org/json/JSONObject.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-201">
-          <caret line="169" column="35" selection-start-line="169" selection-start-column="35" selection-end-line="169" selection-end-column="35" />
-          <folding>
-            <element signature="e#8887#8888#0" expanded="true" />
-            <element signature="e#8914#8915#0" expanded="true" />
-            <element signature="e#8969#8970#0" expanded="true" />
-            <element signature="e#9015#9016#0" expanded="true" />
-            <element signature="e#9505#9506#0" expanded="true" />
-            <element signature="e#9537#9538#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="154">
+          <caret line="212" selection-start-line="212" selection-end-line="212" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="73" column="59" lean-forward="true" selection-start-line="73" selection-start-column="59" selection-end-line="73" selection-end-column="59" />
+        <state relative-caret-position="-1523">
+          <caret line="283" column="113" selection-start-line="283" selection-start-column="113" selection-end-line="283" selection-end-column="113" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12560#12561#0" expanded="true" />
-            <element signature="e#12588#12589#0" expanded="true" />
+            <element signature="e#18287#18288#0" expanded="true" />
+            <element signature="e#18315#18316#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ChampionStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="91" column="5" lean-forward="true" selection-start-line="91" selection-start-column="5" selection-end-line="91" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8782#8783#0" expanded="true" />
+            <element signature="e#8809#8810#0" expanded="true" />
+            <element signature="e#8864#8865#0" expanded="true" />
+            <element signature="e#8910#8911#0" expanded="true" />
+            <element signature="e#9495#9496#0" expanded="true" />
+            <element signature="e#9527#9528#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>PIS2018-Projektarbeit</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>json-20170516</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

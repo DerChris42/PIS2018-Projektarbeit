@@ -1,8 +1,5 @@
 import javafx.application.Application;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -16,9 +13,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
-import javax.print.DocFlavor;
-import javax.swing.event.ChangeListener;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.UnaryOperator;
 
 
@@ -33,6 +33,14 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
         GridPane gridPane = new GridPane();
         borderPane.setCenter(gridPane);
+
+        Image Ashe = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Ashe.jpg"),200,363,false,false);
+        Image Caitlyn = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Caitlyn.jpg"),200,363,false,false);
+        Image Draven = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Draven.jpg"),200,363,false,false);
+        Image Jinx = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Jinx.jpg"),200,363,false,false);
+        Image Tristana = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Tristana.jpg"),200,363,false,false);
+        Image Varus = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Varus.jpg"),200,363,false,false);
+
         //borderpane
 
         ObservableList<String> champions =
@@ -73,10 +81,7 @@ public class Main extends Application {
         borderPane.setTop(topToolBar);
         borderPane.setAlignment(topToolBar,Pos.TOP_CENTER);
 
-        Image leftChampionImage = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\"+leftChampionComboBox.getSelectionModel().getSelectedItem()+".jpg"));
-        ImageView leftChampionImageView = new ImageView(leftChampionImage);
-        Image rightChampionImage = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\"+rightChampionComboBox.getSelectionModel().getSelectedItem()+".jpg"));
-        ImageView rightChampionImageView = new ImageView(rightChampionImage);
+
         GridPane leftSide = new GridPane();
         GridPane rightSide = new GridPane();
         ColumnConstraints leftSideCol = new ColumnConstraints();
@@ -102,8 +107,7 @@ public class Main extends Application {
         rightChampionItems.setHgap(4);
         rightChampionItems.setPrefColumns(2);
 
-        leftSide.add(leftChampionImageView,0,0);
-        rightSide.add(rightChampionImageView,0,0);
+       // rightSide.add(rightChampionImageView,0,0);
         leftSide.add(leftChampionItems,0,1);
         rightSide.add(rightChampionItems,0,1);
 
@@ -136,7 +140,6 @@ public class Main extends Application {
         rightChampionItems.getChildren().addAll(rightItem1,rightItem2,rightItem3,rightItem4,rightItem5,rightItem6,rightItemPrice);
         rightChampionItems.setMaxWidth(50);
 
-
         borderPane.setLeft(leftSide);
         borderPane.setRight(rightSide);
 
@@ -161,6 +164,7 @@ public class Main extends Application {
         RowConstraints row7 = new RowConstraints();
         RowConstraints row8 = new RowConstraints();
         RowConstraints row9 = new RowConstraints();
+        RowConstraints row10 = new RowConstraints();
         row0.setPercentHeight(10);
         row1.setPercentHeight(10);
         row2.setPercentHeight(10);
@@ -171,7 +175,8 @@ public class Main extends Application {
         row7.setPercentHeight(10);
         row8.setPercentHeight(10);
         row9.setPercentHeight(10);
-        gridPane.getRowConstraints().addAll(row0,row1,row2,row3,row4,row5,row6,row7,row8,row9);
+        row10.setPercentHeight(10);
+        gridPane.getRowConstraints().addAll(row0,row1,row2,row3,row4,row5,row6,row7,row8,row9,row10);
 
         Label HPLabel = new Label("HP");
         Label manaLabel = new Label("MANA");
@@ -185,54 +190,57 @@ public class Main extends Application {
         Label DPSLabel = new Label("DPS");
         Label rangeLabel = new Label("RANGE");
 
+        //List<Label> statNameLabelArray = Arrays.asList(HPLabel,manaLabel,armorLabel,MRLabel,CDRLabel,MSLabel,ADLabel,ASLabel,critLabel,DPSLabel,rangeLabel);
         Label[] statNameLabelArray = {HPLabel,manaLabel,armorLabel,MRLabel,CDRLabel,MSLabel,ADLabel,ASLabel,critLabel,DPSLabel,rangeLabel};
 
-        Label leftChampionHP = new Label("0");
-        Label leftChampionMana = new Label("0");
-        Label leftChampionarmor = new Label("0");
-        Label leftChampionMR = new Label("0");
-        Label leftChampionCDR= new Label("0");
-        Label leftChampionMS= new Label("0");
-        Label leftChampionAD = new Label("0");
-        Label leftChampionAS = new Label("0");
-        Label leftChampioncrit = new Label("0");
-        Label leftChampionDPS= new Label("0");
-        Label leftChampionrange= new Label("0");
+        TextField leftChampionHP = new TextField("0");
+        TextField leftChampionMana = new TextField("0");
+        TextField leftChampionarmor = new TextField("0");
+        TextField leftChampionMR = new TextField("0");
+        TextField leftChampionCDR= new TextField("0");
+        TextField leftChampionMS= new TextField("0");
+        TextField leftChampionAD = new TextField("0");
+        TextField leftChampionAS = new TextField("0");
+        TextField leftChampioncrit = new TextField("0");
+        TextField leftChampionDPS= new TextField("0");
+        TextField leftChampionrange= new TextField("0");
 
-        Label[] leftChampionStatsLabel = {leftChampionHP,leftChampionMana,leftChampionarmor,leftChampionMR,leftChampionCDR,leftChampionMS,leftChampionAD,
+        TextField[] leftChampionStatsTextField = {leftChampionHP,leftChampionMana,leftChampionarmor,leftChampionMR,leftChampionCDR,leftChampionMS,leftChampionAD,
                 leftChampionAS,leftChampioncrit,leftChampionDPS,leftChampionrange};
 
 
-        Label rightChampionHP = new Label("0");
-        Label rightChampionMana = new Label("0");
-        Label rightChampionarmor = new Label("0");
-        Label rightChampionMR = new Label("0");
-        Label rightChampionCDR= new Label("0");
-        Label rightChampionMS= new Label("0");
-        Label rightChampionAD = new Label("0");
-        Label rightChampionAS = new Label("0");
-        Label rightChampioncrit = new Label("0");
-        Label rightChampionDPS= new Label("0");
-        Label rightChampionrange= new Label("0");
+        TextField rightChampionHP = new TextField("0");
+        TextField rightChampionMana = new TextField("0");
+        TextField rightChampionarmor = new TextField("0");
+        TextField rightChampionMR = new TextField("0");
+        TextField rightChampionCDR= new TextField("0");
+        TextField rightChampionMS= new TextField("0");
+        TextField rightChampionAD = new TextField("0");
+        TextField rightChampionAS = new TextField("0");
+        TextField rightChampioncrit = new TextField("0");
+        TextField rightChampionDPS= new TextField("0");
+        TextField rightChampionrange= new TextField("0");
 
-        Label[] rightChampionStatsLabel = {rightChampionHP,rightChampionMana,rightChampionarmor,rightChampionMR,rightChampionCDR,rightChampionMS,rightChampionAD,
+        TextField[] rightChampionStatsTextField = {rightChampionHP,rightChampionMana,rightChampionarmor,rightChampionMR,rightChampionCDR,rightChampionMS,rightChampionAD,
                 rightChampionAS,rightChampioncrit,rightChampionDPS,rightChampionrange};
 
         for (int i = 0; i<statNameLabelArray.length;i++){
-            gridPane.add(leftChampionStatsLabel[i],0,i);
+            gridPane.add(leftChampionStatsTextField[i],0,i);
             gridPane.add(statNameLabelArray[i],1,i);
-            gridPane.add(rightChampionStatsLabel[i],2,i);
+            gridPane.add(rightChampionStatsTextField[i],2,i);
         }
+
+        //Arrays.stream(statNameLabelArray).iterator().;
 
         for (int i = 0; i<statNameLabelArray.length;i++){
             statNameLabelArray[i].setTextAlignment(TextAlignment.CENTER);
             GridPane.setHalignment(statNameLabelArray[i], HPos.CENTER);
-            leftChampionStatsLabel[i].setTextAlignment(TextAlignment.CENTER);
-            GridPane.setHalignment(leftChampionStatsLabel[i], HPos.CENTER);
-            leftChampionStatsLabel[i].setMinWidth(40);
-            rightChampionStatsLabel[i].setTextAlignment(TextAlignment.CENTER);
-            GridPane.setHalignment(rightChampionStatsLabel[i], HPos.CENTER);
-            rightChampionStatsLabel[i].setMinWidth(40);
+            //leftChampionStatsTextField[i].setTextFormatter(Pos.CENTER);           //(TextAlignment.CENTER);
+            GridPane.setHalignment(leftChampionStatsTextField[i], HPos.CENTER);
+            leftChampionStatsTextField[i].setMinWidth(40);
+           // rightChampionStatsTextField[i].setTextAlignment(TextAlignment.CENTER);
+            GridPane.setHalignment(rightChampionStatsTextField[i], HPos.CENTER);
+            rightChampionStatsTextField[i].setMinWidth(40);
         }
 
         String labelDesign = "-fx-background-color: darkgrey; " +
@@ -242,25 +250,8 @@ public class Main extends Application {
                 "-fx-border-color: black;";
 
         for (int i = 0; i<statNameLabelArray.length;i++){
-            leftChampionStatsLabel[i].setStyle(labelDesign);
             statNameLabelArray[i].setStyle(labelDesign);
-            rightChampionStatsLabel[i].setStyle(labelDesign);
         }
-
-        String betterStat = "-fx-background-color: darkgrey; " +
-                "-fx-text-fill: #17ff21;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-size: 18;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-color: black;";
-
-        String worseStat = "-fx-background-color: darkgrey; " +
-                "-fx-text-fill: #ff585a;" +
-                "-fx-font-weight: bold;" +
-                "-fx-font-size: 18;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-color: black;";
-
 
         //event handling
         compareButton.setOnAction(event -> {
@@ -279,16 +270,18 @@ public class Main extends Application {
             rightChampionStats=rightChampion.getStats(rightChampionName);
 
             for (int i = 0; i<11;i++){
-                leftChampionStatsLabel[i].setText(leftChampionStats[i]+"");
-                rightChampionStatsLabel[i].setText(rightChampionStats[i]+"");
+                leftChampionStatsTextField[i].setText(leftChampionStats[i]+"");
+                rightChampionStatsTextField[i].setText(rightChampionStats[i]+"");
 
             }
             compareStats(leftChampionStats,rightChampionStats);
             for (int i = 0;i<compareArray.length;i++){
-                if(compareArray[i]==0){leftChampionStatsLabel[i].setStyle(betterStat);}
-                if(compareArray[i]==2){leftChampionStatsLabel[i].setStyle(worseStat);}
-                if(compareArray[i]==0){rightChampionStatsLabel[i].setStyle(worseStat);}
-                if(compareArray[i]==2){rightChampionStatsLabel[i].setStyle(betterStat);}
+                if(compareArray[i]==0){leftChampionStatsTextField[i].setStyle("-fx-background-color: lightgreen");}
+                if(compareArray[i]==1){leftChampionStatsTextField[i].setStyle("-fx-background-color: white");}
+                if(compareArray[i]==2){leftChampionStatsTextField[i].setStyle("-fx-background-color: #ff6e66");}
+                if(compareArray[i]==0){rightChampionStatsTextField[i].setStyle("-fx-background-color: #ff6e66");}
+                if(compareArray[i]==1){rightChampionStatsTextField[i].setStyle("-fx-background-color: white");}
+                if(compareArray[i]==2){rightChampionStatsTextField[i].setStyle("-fx-background-color: lightgreen");}
             }
             leftItemPrice.setText(leftChampion.getItemPrice()+"");
             rightItemPrice.setText(rightChampion.getItemPrice()+"");
@@ -344,9 +337,33 @@ public class Main extends Application {
             rightChampion.addItem(selectedItem,6);
         });
 
-        primaryStage.setTitle("Champion compare Patch 8.11");
+        Map<String,Image> championImageMap = Map.of(
+                "Ashe", Ashe,
+                "Caitlyn", Caitlyn,
+                "Draven",Draven,
+                "Jinx",Jinx,
+                "Tristana",Tristana,
+                "Varus",Varus
+        );
+
+        leftChampionComboBox.setOnAction((event) -> {
+            String selectedChampion = leftChampionComboBox.getSelectionModel().getSelectedItem();
+            ImageView leftChampionImageView = new ImageView();
+            leftChampionImageView.setImage(championImageMap.get(selectedChampion));
+            leftSide.add(leftChampionImageView,0,0);
+        });
+
+        rightChampionComboBox.setOnAction((event) -> {
+            String selectedChampion = rightChampionComboBox.getSelectionModel().getSelectedItem();
+            ImageView rightChampionImageView = new ImageView();
+            rightChampionImageView.setImage(championImageMap.get(selectedChampion));
+            rightSide.add(rightChampionImageView,0,0);
+        });
+
+
+        primaryStage.setTitle("Champion compare Patch 8.12");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(borderPane, 650, 600));
+        primaryStage.setScene(new Scene(borderPane, 650, 650));
         primaryStage.show();
     }
 

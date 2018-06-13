@@ -1,13 +1,9 @@
-import javafx.scene.web.HTMLEditorSkin;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.*;
-import java.util.function.DoubleBinaryOperator;
-import java.util.function.DoubleUnaryOperator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 
 public class ChampionStats implements Champion {
@@ -39,8 +35,8 @@ public class ChampionStats implements Champion {
     double attackspeed;
     double dps;
     double cdr;
-    JSONObject stats;
-    String[] itemArray = new String[6];
+    private JSONObject stats;
+    private String[] itemArray = new String[6];
     double itemHP=0;
     double itemMana=0;
     double itemArmor=0;
@@ -63,8 +59,7 @@ public class ChampionStats implements Champion {
             e.printStackTrace();
         }
         itemMap.put("No Item", () -> {});
-        itemMap.put("Infinity Edge", () -> {itemAttackDamage += 80;itemPrice+=3700;hasInfinityEdge=true;
-            System.out.println("Ich bin ein Infinity Edge");});
+        itemMap.put("Infinity Edge", () -> {itemAttackDamage += 80;itemPrice+=3700;hasInfinityEdge=true;});
         itemMap.put("Death's Dance",() -> {itemAttackDamage += 80;itemcdr+=10;itemPrice+=3500;});
         itemMap.put("The Bloodthirster",() -> {itemAttackDamage += 80;itemPrice+=3500;/*lifesteal 20*/});
         itemMap.put("Essence Reaver",() -> {itemAttackDamage += 70;itemcdr+=20;itemMana+=300;itemPrice+=3200;});
@@ -189,6 +184,7 @@ public class ChampionStats implements Champion {
         calculateItemStats();
         calculateStats();
         double[] statArray ={hp,mana,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange,itemPrice};
+       // final int[] intStatArray = Arrays.stream(statArray).mapToInt(i -> (int) i).toArray();
         return statArray;
     }
 
