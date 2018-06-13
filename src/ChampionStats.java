@@ -115,6 +115,7 @@ public class ChampionStats implements Champion {
         attackdamageperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackdamageperlevel");
         attackspeedoffset = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedoffset");
         attackspeedperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedperlevel");
+        cdr = 0; //neccessary! wizjout it cdr would stack up with each comparison
     }
 
     Map<String,Runnable> itemMap = new HashMap<>();
@@ -166,6 +167,9 @@ public class ChampionStats implements Champion {
         }
         double critDamageAmplifier = 1 + crit/100;
         dps = (attackdamage*attackspeed)* critDamageAmplifier;
+        if(championName.equals("Tristana")){
+            attackrange+= 8*(level-1);
+        }
     }
 
     public void setLevel(int lvl){

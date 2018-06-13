@@ -34,12 +34,12 @@ public class Main extends Application {
         GridPane gridPane = new GridPane();
         borderPane.setCenter(gridPane);
 
-        Image Ashe = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Ashe.jpg"),200,363,false,false);
-        Image Caitlyn = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Caitlyn.jpg"),200,363,false,false);
-        Image Draven = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Draven.jpg"),200,363,false,false);
-        Image Jinx = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Jinx.jpg"),200,363,false,false);
-        Image Tristana = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Tristana.jpg"),200,363,false,false);
-        Image Varus = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Varus.jpg"),200,363,false,false);
+        Image Ashe = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Ashe.jpg"),200,363,false,false);
+        Image Caitlyn = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Caitlyn.jpg"),200,363,false,false);
+        Image Draven = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Draven.jpg"),200,363,false,false);
+        Image Jinx = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\jinx.jpg"),200,363,false,false);
+        Image Tristana = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Tristana.jpg"),200,363,false,false);
+        Image Varus = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Varus.jpg"),200,363,false,false);
 
         //borderpane
 
@@ -230,20 +230,20 @@ public class Main extends Application {
             gridPane.add(rightChampionStatsTextField[i],2,i);
         }
 
-        //Arrays.stream(statNameLabelArray).iterator().;
-
         for (int i = 0; i<statNameLabelArray.length;i++){
             statNameLabelArray[i].setTextAlignment(TextAlignment.CENTER);
             GridPane.setHalignment(statNameLabelArray[i], HPos.CENTER);
-            //leftChampionStatsTextField[i].setTextFormatter(Pos.CENTER);           //(TextAlignment.CENTER);
+            leftChampionStatsTextField[i].alignmentProperty().set(Pos.CENTER);
+            leftChampionStatsTextField[i].setEditable(false);
             GridPane.setHalignment(leftChampionStatsTextField[i], HPos.CENTER);
             leftChampionStatsTextField[i].setMinWidth(40);
-           // rightChampionStatsTextField[i].setTextAlignment(TextAlignment.CENTER);
+            rightChampionStatsTextField[i].alignmentProperty().set(Pos.CENTER);
+            rightChampionStatsTextField[i].setEditable(false);
             GridPane.setHalignment(rightChampionStatsTextField[i], HPos.CENTER);
             rightChampionStatsTextField[i].setMinWidth(40);
         }
 
-        String labelDesign = "-fx-background-color: darkgrey; " +
+        String labelDesign = "-fx-background-color: #d4d4d4; " +
                 "-fx-font-weight: bold;" +
                 "-fx-font-size: 18;" +
                 "-fx-border-width: 2;" +
@@ -270,8 +270,8 @@ public class Main extends Application {
             rightChampionStats=rightChampion.getStats(rightChampionName);
 
             for (int i = 0; i<11;i++){
-                leftChampionStatsTextField[i].setText(leftChampionStats[i]+"");
-                rightChampionStatsTextField[i].setText(rightChampionStats[i]+"");
+                leftChampionStatsTextField[i].setText(((double)(Math.round((leftChampionStats[i]*10))))/10+"");
+                rightChampionStatsTextField[i].setText(Math.round(rightChampionStats[i])+"");
 
             }
             compareStats(leftChampionStats,rightChampionStats);
@@ -361,7 +361,7 @@ public class Main extends Application {
         });
 
 
-        primaryStage.setTitle("Champion compare Patch 8.12");
+        primaryStage.setTitle("Compare League Of Legends Champions - Patch 8.12");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(borderPane, 650, 650));
         primaryStage.show();
