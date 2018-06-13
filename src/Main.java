@@ -2,17 +2,16 @@ import javafx.application.Application;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
@@ -27,6 +26,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
+        Champion leftChampion = new ChampionStats();
+        Champion rightChampion = new ChampionStats();
 
         BorderPane borderPane = new BorderPane();
         GridPane gridPane = new GridPane();
@@ -57,7 +59,7 @@ public class Main extends Application {
 
         rightChampionLevel.setAlignment(Pos.CENTER_RIGHT);
         Button compareButton = new Button("Compare!");
-        ToolBar toolBar = new ToolBar(
+        ToolBar topToolBar = new ToolBar(
                 leftChampionComboBox,
                 new Separator(),
                 leftChampionLevel,
@@ -68,18 +70,76 @@ public class Main extends Application {
                 new Separator(),
                 compareButton
                 );
-        borderPane.setTop(toolBar);
-        borderPane.setAlignment(toolBar,Pos.TOP_CENTER);
+        borderPane.setTop(topToolBar);
+        borderPane.setAlignment(topToolBar,Pos.TOP_CENTER);
 
-        Label platzhalterBot = new Label("Auch hier könnte momentan noch IHRE Werbung stehen!");
-        borderPane.setBottom(platzhalterBot);
-       /* Image jinxLeft = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\jinx.jpg"));
-        ImageView leftChampionImage = new ImageView(jinxLeft);
-        Image jinxRight = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\jinx.jpg"));
-        ImageView rightChampionImage = new ImageView(jinxRight);
-        borderPane.setLeft(leftChampionImage);
-        borderPane.setRight(rightChampionImage);
-*/
+        Image leftChampionImage = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\"+leftChampionComboBox.getSelectionModel().getSelectedItem()+".jpg"));
+        ImageView leftChampionImageView = new ImageView(leftChampionImage);
+        Image rightChampionImage = new Image(new FileInputStream("C:\\Users\\user\\IdeaProjects\\Prijektarbeit\\src\\images\\"+rightChampionComboBox.getSelectionModel().getSelectedItem()+".jpg"));
+        ImageView rightChampionImageView = new ImageView(rightChampionImage);
+        GridPane leftSide = new GridPane();
+        GridPane rightSide = new GridPane();
+        ColumnConstraints leftSideCol = new ColumnConstraints();
+        ColumnConstraints rightSideCol = new ColumnConstraints();
+        RowConstraints leftSideRow0 = new RowConstraints();
+        RowConstraints leftSideRow1 = new RowConstraints();
+        RowConstraints rightSideRow0 = new RowConstraints();
+        RowConstraints rightSideRow1 = new RowConstraints();
+        leftSide.getColumnConstraints().add(leftSideCol);
+        leftSide.getRowConstraints().addAll(leftSideRow0,leftSideRow1);
+        rightSide.getColumnConstraints().add(rightSideCol);
+        rightSide.getRowConstraints().addAll(rightSideRow0,rightSideRow1);
+
+        TilePane leftChampionItems = new TilePane();
+        leftChampionItems.setPadding(new Insets(5, 0, 5, 0));
+        leftChampionItems.setVgap(4);
+        leftChampionItems.setHgap(4);
+        leftChampionItems.setPrefColumns(2);
+
+        TilePane rightChampionItems = new TilePane();
+        rightChampionItems.setPadding(new Insets(5, 0, 5, 0));
+        rightChampionItems.setVgap(4);
+        rightChampionItems.setHgap(4);
+        rightChampionItems.setPrefColumns(2);
+
+        leftSide.add(leftChampionImageView,0,0);
+        rightSide.add(rightChampionImageView,0,0);
+        leftSide.add(leftChampionItems,0,1);
+        rightSide.add(rightChampionItems,0,1);
+
+        ObservableList<String> items =
+                FXCollections.observableArrayList(
+                        "No Item","Infinity Edge","Death's Dance","The Bloodthirster","Essence Reaver","Stormrazor","Mercurial Scimitar",
+                        "The Black Cleaver","B. F. Sword","Blade of the Ruined King","Guinsoo's Rageblade","Nashor's Tooth",
+                        "Phantom Dancer","Trinity Force","Berserker's Greaves","Guardian Angel"
+                );
+
+        ComboBox<String> leftItem1 = new ComboBox<>(items);
+        ComboBox<String> leftItem2 = new ComboBox<>(items);
+        ComboBox<String> leftItem3 = new ComboBox<>(items);
+        ComboBox<String> leftItem4 = new ComboBox<>(items);
+        ComboBox<String> leftItem5 = new ComboBox<>(items);
+        ComboBox<String> leftItem6 = new ComboBox<>(items);
+        TextField leftItemPrice = new TextField("0");
+        leftItemPrice.setEditable(false);
+        leftChampionItems.getChildren().addAll(leftItem1,leftItem2,leftItem3,leftItem4,leftItem5,leftItem6,leftItemPrice);
+        leftChampionItems.setMaxWidth(50);
+
+        ComboBox<String> rightItem1 = new ComboBox<>(items);
+        ComboBox<String> rightItem2 = new ComboBox<>(items);
+        ComboBox<String> rightItem3 = new ComboBox<>(items);
+        ComboBox<String> rightItem4 = new ComboBox<>(items);
+        ComboBox<String> rightItem5 = new ComboBox<>(items);
+        ComboBox<String> rightItem6 = new ComboBox<>(items);
+        TextField rightItemPrice = new TextField("0");
+        rightItemPrice.setEditable(false);
+        rightChampionItems.getChildren().addAll(rightItem1,rightItem2,rightItem3,rightItem4,rightItem5,rightItem6,rightItemPrice);
+        rightChampionItems.setMaxWidth(50);
+
+
+        borderPane.setLeft(leftSide);
+        borderPane.setRight(rightSide);
+
         //gridpane
         //colums
         ColumnConstraints col0 = new ColumnConstraints();
@@ -113,9 +173,8 @@ public class Main extends Application {
         row9.setPercentHeight(10);
         gridPane.getRowConstraints().addAll(row0,row1,row2,row3,row4,row5,row6,row7,row8,row9);
 
-
-
         Label HPLabel = new Label("HP");
+        Label manaLabel = new Label("MANA");
         Label armorLabel = new Label("ARMOR");
         Label MRLabel = new Label("MR");
         Label CDRLabel = new Label("CDR");
@@ -126,9 +185,10 @@ public class Main extends Application {
         Label DPSLabel = new Label("DPS");
         Label rangeLabel = new Label("RANGE");
 
-        Label[] statNameLabelArray = {HPLabel,armorLabel,MRLabel,CDRLabel,MSLabel,ADLabel,ASLabel,critLabel,DPSLabel,rangeLabel};
+        Label[] statNameLabelArray = {HPLabel,manaLabel,armorLabel,MRLabel,CDRLabel,MSLabel,ADLabel,ASLabel,critLabel,DPSLabel,rangeLabel};
 
         Label leftChampionHP = new Label("0");
+        Label leftChampionMana = new Label("0");
         Label leftChampionarmor = new Label("0");
         Label leftChampionMR = new Label("0");
         Label leftChampionCDR= new Label("0");
@@ -139,11 +199,12 @@ public class Main extends Application {
         Label leftChampionDPS= new Label("0");
         Label leftChampionrange= new Label("0");
 
-        Label[] leftChampionStatsLabel = {leftChampionHP,leftChampionarmor,leftChampionMR,leftChampionCDR,leftChampionMS,leftChampionAD,
+        Label[] leftChampionStatsLabel = {leftChampionHP,leftChampionMana,leftChampionarmor,leftChampionMR,leftChampionCDR,leftChampionMS,leftChampionAD,
                 leftChampionAS,leftChampioncrit,leftChampionDPS,leftChampionrange};
 
 
         Label rightChampionHP = new Label("0");
+        Label rightChampionMana = new Label("0");
         Label rightChampionarmor = new Label("0");
         Label rightChampionMR = new Label("0");
         Label rightChampionCDR= new Label("0");
@@ -154,10 +215,8 @@ public class Main extends Application {
         Label rightChampionDPS= new Label("0");
         Label rightChampionrange= new Label("0");
 
-        Label[] rightChampionStatsLabel = {rightChampionHP,rightChampionarmor,rightChampionMR,rightChampionCDR,rightChampionMS,rightChampionAD,
+        Label[] rightChampionStatsLabel = {rightChampionHP,rightChampionMana,rightChampionarmor,rightChampionMR,rightChampionCDR,rightChampionMS,rightChampionAD,
                 rightChampionAS,rightChampioncrit,rightChampionDPS,rightChampionrange};
-
-
 
         for (int i = 0; i<statNameLabelArray.length;i++){
             gridPane.add(leftChampionStatsLabel[i],0,i);
@@ -203,11 +262,10 @@ public class Main extends Application {
                 "-fx-border-color: black;";
 
 
+        //event handling
         compareButton.setOnAction(event -> {
             String leftChampionName = leftChampionComboBox.getSelectionModel().getSelectedItem();
             String rightChampionName = rightChampionComboBox.getSelectionModel().getSelectedItem();
-            Champion leftChampion = new ChampionStats();
-            Champion rightChampion = new ChampionStats();
             if (Integer.parseInt(leftChampionLevel.getText())>18){
                 leftChampionLevel.setText("18");
             }
@@ -216,18 +274,11 @@ public class Main extends Application {
                 rightChampionLevel.setText("18");
             }
             rightChampion.setLevel(Integer.parseInt(rightChampionLevel.getText()));
-            System.out.println("Der Linke Champion heißt " + leftChampionName + " und der Rechte heißt " + rightChampionName);
-            try {
-                leftChampionStats=leftChampion.getStats(leftChampionName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                rightChampionStats=rightChampion.getStats(rightChampionName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            for (int i = 0; i<10;i++){
+
+            leftChampionStats=leftChampion.getStats(leftChampionName);
+            rightChampionStats=rightChampion.getStats(rightChampionName);
+
+            for (int i = 0; i<11;i++){
                 leftChampionStatsLabel[i].setText(leftChampionStats[i]+"");
                 rightChampionStatsLabel[i].setText(rightChampionStats[i]+"");
 
@@ -239,17 +290,69 @@ public class Main extends Application {
                 if(compareArray[i]==0){rightChampionStatsLabel[i].setStyle(worseStat);}
                 if(compareArray[i]==2){rightChampionStatsLabel[i].setStyle(betterStat);}
             }
+            leftItemPrice.setText(leftChampion.getItemPrice()+"");
+            rightItemPrice.setText(rightChampion.getItemPrice()+"");
         });
 
+        leftItem1.setOnAction((event) -> {
+            String selectedItem = leftItem1.getSelectionModel().getSelectedItem();
+            leftChampion.addItem(selectedItem,1);
+        });
+        leftItem2.setOnAction((event) -> {
+            String selectedItem = leftItem2.getSelectionModel().getSelectedItem();
+            leftChampion.addItem(selectedItem,2);
+        });
+        leftItem3.setOnAction((event) -> {
+            String selectedItem = leftItem3.getSelectionModel().getSelectedItem();
+            leftChampion.addItem(selectedItem,3);
+        });
+        leftItem4.setOnAction((event) -> {
+            String selectedItem = leftItem4.getSelectionModel().getSelectedItem();
+            leftChampion.addItem(selectedItem,4);
+        });
+        leftItem5.setOnAction((event) -> {
+            String selectedItem = leftItem5.getSelectionModel().getSelectedItem();
+            leftChampion.addItem(selectedItem,5);
+        });
+        leftItem6.setOnAction((event) -> {
+            String selectedItem = leftItem6.getSelectionModel().getSelectedItem();
+            leftChampion.addItem(selectedItem,6);
+        });
+
+        rightItem1.setOnAction((event) -> {
+            String selectedItem = rightItem1.getSelectionModel().getSelectedItem();
+            rightChampion.addItem(selectedItem,1);
+        });
+        rightItem2.setOnAction((event) -> {
+            String selectedItem = rightItem2.getSelectionModel().getSelectedItem();
+            rightChampion.addItem(selectedItem,2);
+        });
+        rightItem3.setOnAction((event) -> {
+            String selectedItem = rightItem3.getSelectionModel().getSelectedItem();
+            rightChampion.addItem(selectedItem,3);
+        });
+        rightItem4.setOnAction((event) -> {
+            String selectedItem = rightItem4.getSelectionModel().getSelectedItem();
+            rightChampion.addItem(selectedItem,4);
+        });
+        rightItem5.setOnAction((event) -> {
+            String selectedItem = rightItem5.getSelectionModel().getSelectedItem();
+            rightChampion.addItem(selectedItem,5);
+        });
+        rightItem6.setOnAction((event) -> {
+            String selectedItem = rightItem6.getSelectionModel().getSelectedItem();
+            rightChampion.addItem(selectedItem,6);
+        });
 
         primaryStage.setTitle("Champion compare Patch 8.11");
-        primaryStage.setScene(new Scene(borderPane, 720, 550));
+        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(borderPane, 650, 600));
         primaryStage.show();
     }
 
-    private double[] leftChampionStats = new double[10];
-    private double[] rightChampionStats = new double[10];
-    private int[] compareArray= new int[10];
+    private double[] leftChampionStats = new double[11];
+    private double[] rightChampionStats = new double[11];
+    private int[] compareArray= new int[11];
 
     private void compareStats(double[] leftStats, double[] rightStats){
         for(int i =0; i<compareArray.length;i++){

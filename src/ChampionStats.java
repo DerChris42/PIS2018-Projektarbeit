@@ -1,10 +1,13 @@
+import javafx.scene.web.HTMLEditorSkin;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.DoubleUnaryOperator;
 
 
 public class ChampionStats implements Champion {
@@ -12,6 +15,8 @@ public class ChampionStats implements Champion {
     private String championName;
     private double hp;
     private double hpperlevel;
+    private double mana;
+    private double manaperlevel;
     private double mp;
     private double mpperlevel;
     private double movespeed;
@@ -30,20 +35,57 @@ public class ChampionStats implements Champion {
     private double attackdamageperlevel;
     private double attackspeedoffset;
     private double attackspeedperlevel;
+    int level = 1;
+    double attackspeed;
+    double dps;
+    double cdr;
+    JSONObject stats;
+    String[] itemArray = new String[6];
+    double itemHP=0;
+    double itemMana=0;
+    double itemArmor=0;
+    double itemSpellblock=0;
+    double itemcdr=0;
+    double itemMovespeed=0;
+    double itemAttackDamage=0;
+    double itemAttackSpeed=0;
+    double itemCrit=0;
+    double itemAP=0;
+    double itemMovespeedPercentModifier=0;
+    boolean hasInfinityEdge=false;
+    int itemPrice=0;
 
-    private static final Map<String,Integer> championKeys;
-    static {
-        championKeys = new HashMap<>();
+
+    public ChampionStats(){
+        try {
+            callRiotGamesAPI();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        itemMap.put("No Item", () -> {});
+        itemMap.put("Infinity Edge", () -> {itemAttackDamage += 80;itemPrice+=3700;hasInfinityEdge=true;
+            System.out.println("Ich bin ein Infinity Edge");});
+        itemMap.put("Death's Dance",() -> {itemAttackDamage += 80;itemcdr+=10;itemPrice+=3500;});
+        itemMap.put("The Bloodthirster",() -> {itemAttackDamage += 80;itemPrice+=3500;/*lifesteal 20*/});
+        itemMap.put("Essence Reaver",() -> {itemAttackDamage += 70;itemcdr+=20;itemMana+=300;itemPrice+=3200;});
+        itemMap.put("Stormrazor",() -> {itemAttackDamage += 70;itemAttackSpeed+=30;itemPrice+=3200 ;});
+        itemMap.put("Mercurial Scimitar",() -> {itemAttackDamage += 65; itemSpellblock+=35;itemPrice+=3600 ;/*lifesteal 10*/});
+        itemMap.put("The Black Cleaver",() -> {itemAttackDamage+=40;itemcdr+=20;itemHP+=400;itemPrice+=3000 ;});
+        itemMap.put("B. F. Sword",() -> {itemAttackDamage+=40;itemPrice+=1300 ;});
+        itemMap.put("Blade of the Ruined King",() -> {itemAttackDamage+=40;itemAttackSpeed+=25;itemPrice+=3200;/*lifesteal 12*/});
+        itemMap.put("Guinsoo's Rageblade",() -> {itemAP+=25;itemAttackDamage+=25;itemAttackSpeed+=25;itemPrice+=3300;});
+        itemMap.put("Nashor's Tooth",() -> {itemAP+=80;attackspeed+=50;itemcdr+=20;itemPrice+=3000;});
+        itemMap.put("Phantom Dancer",() -> {itemAttackSpeed+=45;itemCrit+=30;itemMovespeedPercentModifier+=5;itemPrice+=2800;});
+        itemMap.put("Trinity Force",() -> {itemAttackDamage+=25;itemAttackSpeed+=40;itemcdr+=20;itemMovespeedPercentModifier+=5;itemHP+=250;itemMana+=250;itemPrice+=3733;});
+        itemMap.put("Berserker's Greaves",() -> {itemAttackSpeed+=35;itemMovespeed+=45;itemPrice+=1100;});
+        itemMap.put("Guardian Angel",() -> {itemAttackDamage+=45;itemArmor+=40;itemPrice+=2800;});
     }
 
-    public void champStatsViaAPI() throws Exception {
+    public void callRiotGamesAPI() throws Exception {
 
-        // build a URL
         String s = "https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&champListData=stats&dataById=false&api_key=RGAPI-cc6257d5-b980-4a9a-9b10-eae3422eed61";
-        //s += URLEncoder.encode("UTF-8");
         URL url = new URL(s);
 
-        // read from the URL
         Scanner scan = new Scanner(url.openStream());
         String str = new String();
         while (scan.hasNext()) {
@@ -51,11 +93,14 @@ public class ChampionStats implements Champion {
         }
         scan.close();
 
-        // build a JSON object
-        JSONObject stats = new JSONObject(str);
+        stats = new JSONObject(str);
+    }
+
+    private void getStatsFromJSON(){
 
         hp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hp");
-        System.out.println(championName+" hp sind " + hp);
+        mana = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel");
+        manaperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp");
         hpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("hpperlevel");
         mp = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mp");
         mpperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("mpperlevel");
@@ -77,28 +122,53 @@ public class ChampionStats implements Champion {
         attackspeedperlevel = stats.getJSONObject("data").getJSONObject(championName).getJSONObject("stats").getDouble("attackspeedperlevel");
     }
 
-    int level = 1;
-    double attackspeed;
-    double dps;
-    double cdr;
+    Map<String,Runnable> itemMap = new HashMap<>();
 
+    private void calculateItemStats(){
+        itemHP=0;
+        itemMana=0;
+        itemArmor=0;
+        itemSpellblock=0;
+        itemcdr=0;
+        itemMovespeed=0;
+        itemAttackDamage=0;
+        itemAttackSpeed=0;
+        itemCrit=0;
+        itemPrice=0;
+        itemAP=0;
+        itemMovespeedPercentModifier=0;
+        hasInfinityEdge=false;
 
-    //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
+        for (int i = 0;i<6;i++){
+            if (itemArray[i]==null){itemArray[i]="No Item";}
+            itemMap.get(itemArray[i]).run();
+        }
+    }
+
+    //[HP,Mana,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
     private void calculateStats(){
-        hp = hp + (hpperlevel * (0.65+0.035*level));// + item;
-        spellblock = spellblock +(spellblockperlevel * (0.65+0.035*level));// + item;
-        cdr = cdr;// + item;
-        movespeed = movespeed;// +item;
+        hp = hp + hpperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemAttackDamage;
+        mana = mana + manaperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemMana;
+        armor = armor + armorperlevel * (level-1) * (0.7025+0.0175*(level-1))+itemArmor;
+        spellblock = spellblock +(spellblockperlevel * (level-1) * (0.7025+0.0175*(level-1)))+itemSpellblock;
+        cdr = cdr + itemcdr;
+        if(cdr>40){cdr=40;}
+        movespeed = movespeed+itemMovespeed+(movespeed*(itemMovespeedPercentModifier/100));
         if (movespeed>415 && movespeed<490){
             movespeed=movespeed*0.8+83;
         }
         if (movespeed>490){
             movespeed = movespeed * 0.5+230;
         }
-        attackdamage = attackdamage + (attackdamageperlevel*(0.65+0.035*level));// +item;
-        double bonusAttackSpeed = (attackspeedperlevel*(0.65+0.035*level));//+item;
+        attackdamage = attackdamage + (attackdamageperlevel* (level-1) * (0.7025+0.0175*(level-1)))+itemAttackDamage;
+        double bonusAttackSpeed = ((attackspeedperlevel/100) * (level-1) * (0.7025+0.0175*(level-1)))+(itemAttackSpeed/100);
         attackspeed =(0.625/1-attackspeedoffset)+(0.625/1-attackspeedoffset)*bonusAttackSpeed;
-        crit = crit;// + item;
+        if (hasInfinityEdge){
+            crit = (crit + itemCrit)*2;
+        }
+        else {
+            crit = crit + itemCrit;
+        }
         double critDamageAmplifier = 1 + crit/100;
         dps = (attackdamage*attackspeed)* critDamageAmplifier;
     }
@@ -107,17 +177,22 @@ public class ChampionStats implements Champion {
         level = lvl;
     }
 
-    public void addItem(String addedItem) {
-    //    item = addedItem;
+    public void addItem(String addedItem,int index) {
+        itemArray[index-1] = addedItem;
     }
 
     //the array is ordered the following way
-    //[HP,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
-    public double[] getStats(String champName) throws Exception {
+    //[HP,Mana,armor,spellblock,cdr,movespeed,AttackDamage,AttackSpeed,Crit%,DPS,Range]
+    public double[] getStats(String champName){
         championName = champName;
-        champStatsViaAPI();
+        getStatsFromJSON();
+        calculateItemStats();
         calculateStats();
-        double[] statArray ={hp,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange};
+        double[] statArray ={hp,mana,armor,spellblock,cdr,movespeed,attackdamage,attackspeed,crit,dps,attackrange,itemPrice};
         return statArray;
+    }
+
+    public int getItemPrice(){
+        return itemPrice;
     }
 }
