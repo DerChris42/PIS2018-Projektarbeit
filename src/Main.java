@@ -29,12 +29,12 @@ public class Main extends Application {
         GridPane gridPane = new GridPane();
         borderPane.setCenter(gridPane);
 
-        Image Ashe = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Ashe.jpg"),200,363,false,false);
-        Image Caitlyn = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Caitlyn.jpg"),200,363,false,false);
-        Image Draven = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Draven.jpg"),200,363,false,false);
-        Image Jinx = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\jinx.jpg"),200,363,false,false);
-        Image Tristana = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Tristana.jpg"),200,363,false,false);
-        Image Varus = new Image(new FileInputStream("M:\\Informatik\\PIS2018-Projektarbeit\\src\\images\\Varus.jpg"),200,363,false,false);
+        Image Ashe = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Ashe.jpg"),200,363,false,false);
+        Image Caitlyn = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Caitlyn.jpg"),200,363,false,false);
+        Image Draven = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Draven.jpg"),200,363,false,false);
+        Image Jinx = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\jinx.jpg"),200,363,false,false);
+        Image Tristana = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Tristana.jpg"),200,363,false,false);
+        Image Varus = new Image(new FileInputStream("C:\\Users\\Hollatz\\Documents\\GitHub\\PIS2018-Projektarbeit\\src\\images\\Varus.jpg"),200,363,false,false);
 
         //borderpane
 
@@ -277,8 +277,8 @@ public class Main extends Application {
                 if(compareArray[i]==1){rightChampionStatsTextField[i].setStyle("-fx-background-color: white");}
                 if(compareArray[i]==2){rightChampionStatsTextField[i].setStyle("-fx-background-color: lightgreen");}
             }
-            leftItemPrice.setText(leftChampion.getItemPrice()+"");
-            rightItemPrice.setText(rightChampion.getItemPrice()+"");
+            leftItemPrice.setText("Preis: " + leftChampion.getItemPrice()+" Gold");
+            rightItemPrice.setText("Preis: " + rightChampion.getItemPrice()+" Gold");
         });
 
         leftItem1.setOnAction((event) -> {
@@ -352,7 +352,6 @@ public class Main extends Application {
             rightChampionImageView.setImage(championImageMap.get(selectedChampion));
             rightSide.add(rightChampionImageView,0,0);
         });
-
 
         primaryStage.setTitle("Compare League Of Legends Champions - Patch 8.12");
         primaryStage.setResizable(false);
